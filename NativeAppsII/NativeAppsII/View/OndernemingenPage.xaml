@@ -7,33 +7,38 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
-        <Rectangle HorizontalAlignment="Left" Height="349" Margin="205,173,0,0" VerticalAlignment="Top" Width="316" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}"/>
-        <TextBox HorizontalAlignment="Left" Margin="328,246,0,0" Text="" VerticalAlignment="Top" FontSize="20" Width="175" PlaceholderText="Naam"/>
+        <Rectangle HorizontalAlignment="Left" Height="371" Margin="205,173,0,0" VerticalAlignment="Top" Width="316" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+        <AutoSuggestBox x:Name="NaamFilter" PlaceholderText="Zoek bedrijf" TextChanged="NaamFilter_Changed" QueryIcon="Find" Margin="325,252,0,0" VerticalAlignment="Top" Height="32" Width="178" HorizontalAlignment="Left">
+            <AutoSuggestBox/>
+        </AutoSuggestBox>
         <TextBlock HorizontalAlignment="Left" Margin="219,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe UI" FontSize="20"><Run Text="Naam"/><Run Text=":"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="219,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Text="Type:&#xD;&#xA;" Height="36" Width="52"/>
-        <ComboBox HorizontalAlignment="Left" Margin="325,312,0,0" VerticalAlignment="Top" Width="178"/>
-        <Button Content="Nu open" HorizontalAlignment="Left" Margin="219,443,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.328" Width="284"/>
+        <TextBlock HorizontalAlignment="Left" Margin="219,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Text="Categorie:" Height="36" Width="96"/>
+        <ComboBox x:Name="TypeFilter" HorizontalAlignment="Left" Margin="325,312,0,0" VerticalAlignment="Top" Width="178" SelectionChanged="TypeFilter_SelectionChanged"/>
+        <Button Content="Nu open" HorizontalAlignment="Left" Margin="219,443,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.328" Width="284" Click="IsOpenFilter"/>
         <TextBlock HorizontalAlignment="Left" Margin="219,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20"><Run Text="Gemeente:"/><LineBreak/><Run/></TextBlock>
-        <ComboBox HorizontalAlignment="Left" Margin="325,371,0,0" VerticalAlignment="Top" Width="178"/>
+        <ComboBox x:Name="GemeenteFilter" HorizontalAlignment="Left" Margin="325,371,0,0" VerticalAlignment="Top" Width="178" SelectionChanged="ComboBox_SelectionChanged"/>
 
         <ListView x:Name="lvOndernemingen" ItemsSource="{Binding}" Margin="577,173,365,86">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button>
+                    <Button Click="GoToOnderneming" Margin="0,0,0,5">
                         <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0"  Background="White" Padding="10">
-                            <TextBlock Text="{Binding Naam}" FontSize="30" FontWeight="Medium" TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding Categorie}" TextWrapping="Wrap" FontStyle="Italic" FontSize="14"/>
+                            <TextBlock x:Name="Name" Text="{Binding Naam}" FontSize="30" FontWeight="Medium" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Categorie.Naam}" TextWrapping="Wrap" FontStyle="Italic" FontSize="14"/>
                             <Line Stroke="White" X1="0" X2="1" Y1="5" Y2="5" StrokeThickness="1.5" Stretch="UniformToFill" Margin="0,10,0,0"/>
-                            <TextBlock Text="{Binding Straat}" TextWrapping="Wrap"/>
-                            <TextBlock Text="Open van:" TextDecorations="Underline" FontWeight="Medium" Margin="0 5 0 0"/>
-                            <TextBlock Text="{Binding Openingsuur}" TextWrapping="Wrap"/> 
-                            <TextBlock Text="{Binding Sluituur}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Adres}" TextWrapping="Wrap"/>
+                            <TextBlock Text="Open van:" TextDecorations="Underline" FontWeight="Medium" Margin="0 6 0 0"/>
+                            <TextBlock Text="{Binding Openingsuren}" TextWrapping="Wrap"/>
+                            <TextBlock x:Name="IsOpen" Foreground="Green" Text="Open"  Visibility="{Binding isOpen}" Opacity="0.8"></TextBlock>
+                            <TextBlock x:Name="IsClossed" Foreground="Red" Text="Closed"  Visibility="{Binding isClosed}" Opacity="0.8"></TextBlock>
                         </StackPanel>
                     </Button>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Button  Style="{StaticResource NavigationBackButtonNormalStyle}"  VerticalAlignment="Top" HorizontalAlignment="Left" Click="GoBack"/>
+        <Button Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="447,500,0,0" Click="Button_Click"/>
     </Grid>
 </Page>
