@@ -7,13 +7,13 @@ namespace NativeAppsII_Services.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class lol : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(lol));
         
         string IMigrationMetadata.Id
         {
-            get { return "201812130018567_Initial"; }
+            get { return "201812131553246_lol"; }
         }
         
         string IMigrationMetadata.Source

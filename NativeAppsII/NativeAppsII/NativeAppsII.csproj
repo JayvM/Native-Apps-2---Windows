@@ -119,7 +119,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Categorie.cs" />
     <Compile Include="Model\Onderneming.cs" />
+    <Compile Include="ViewModel\CategorieViewModel.cs" />
     <Compile Include="ViewModel\OndernemingenViewModel.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -128,6 +130,9 @@
     <Compile Include="Services.cs" />
     <Compile Include="View\OndernemingenPage.xaml.cs">
       <DependentUpon>OndernemingenPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OndernemingPage.xaml.cs">
+      <DependentUpon>OndernemingPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +161,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\OndernemingenPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OndernemingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
