@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <ScrollViewer HorizontalScrollBarVisibility="Auto">
         <Grid x:Name="gridOnderneming">
-            <Grid HorizontalAlignment="Left" Height="281" VerticalAlignment="Top" Width="593" Margin="409,358,0,0">
+            <Grid HorizontalAlignment="Left" Height="281" VerticalAlignment="Top" Width="593" Margin="230,382,0,0">
                 <TextBlock HorizontalAlignment="Left" Margin="24,10,0,0" Text="Categorie:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" />
                 <TextBlock HorizontalAlignment="Left" Margin="24,60,0,0" Text="Openignsuren:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20"/>
                 <TextBlock HorizontalAlignment="Left" Margin="24,120,0,0" Text="Website:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20"/>
@@ -22,12 +22,44 @@
                 <TextBlock HorizontalAlignment="Left" Margin="200,120,0,0" Text="{Binding Website}" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20"/>
                 <TextBlock HorizontalAlignment="Left" Margin="200,220,0,0" Text="{Binding Adres}" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20"/>
             </Grid>
-            <TextBlock HorizontalAlignment="Left" Margin="409,114,0,0" Text="{Binding Naam}" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
-            <TextBlock HorizontalAlignment="Left" Margin="409,217,0,0" Text="{Binding Information}" TextWrapping="Wrap" VerticalAlignment="Top" Height="123" Width="819" FontSize="20" ScrollViewer.IsVerticalScrollChainingEnabled="True"/>
+            <TextBlock HorizontalAlignment="Left" Margin="230,103,0,0" Text="{Binding Naam}" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48"/>
+            <TextBlock HorizontalAlignment="Left" Margin="230,252,0,0" Text="{Binding Information}" TextWrapping="Wrap" VerticalAlignment="Top" Height="123" Width="996" FontSize="20" ScrollViewer.IsVerticalScrollChainingEnabled="True"/>
             <Button  Style="{StaticResource NavigationBackButtonNormalStyle}"   VerticalAlignment="Top" HorizontalAlignment="Left" Click="GoBack"/>
 
-            <Custom:MapControl  x:Name="MapControl" HorizontalAlignment="Left" VerticalAlignment="Top" Height="501" Width="782" Margin="409,644,0,0"/>
+            <Custom:MapControl  x:Name="MapControl" HorizontalAlignment="Left" VerticalAlignment="Top" Height="501" Width="706" Margin="230,668,0,0"/>
+            <TextBlock HorizontalAlignment="Left" Margin="1015,382,0,0" Text="Acties" TextWrapping="Wrap" VerticalAlignment="Top" Height="66" Width="262" FontSize="20"/>
+            <TextBlock HorizontalAlignment="Left" Margin="1015,678,0,0" Text="Evenementen" TextWrapping="Wrap" VerticalAlignment="Top" Height="64" Width="146" FontSize="20" FontFamily="Segoe UI"/>
+            <ListView x:Name="lvActies" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="248" Margin="1015,420,0,0" VerticalAlignment="Top" Width="347">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Click="openActie" Background="Orange" Margin="-10,0,0,0" Padding="-5,-5,-5,-5">
+                            <RelativePanel BorderBrush="Orange" BorderThickness="1,1,1,1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CornerRadius="5,5,5,5" Margin="5"  Background="White" Padding="10">
+                                <TextBlock x:Name="beschrijving"  Text="{Binding Beschrijving}" FontSize="22" FontWeight="Medium" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="geldigtot"  Text="Geldig Tot:" RelativePanel.Below="beschrijving" Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding GeldigTot}" TextWrapping="Wrap" FontStyle="Italic" FontSize="14" RelativePanel.RightOf="geldigtot" RelativePanel.Below="beschrijving" Padding="0,1,5,0"/>
+                                <Line Stroke="White" X1="0" X2="1" Y1="5" Y2="5" StrokeThickness="0" Stretch="UniformToFill"/>
+                            </RelativePanel>
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
+            <ListView x:Name="lvEvenementen" ItemsSource="{Binding}"  HorizontalAlignment="Left" Height="316" Margin="1015,719,0,0" VerticalAlignment="Top" Width="347">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Click="addEvenement" Background="Gray" Margin="-10,0,0,0" Padding="-5,-5,-5,-5">
+                            <RelativePanel BorderBrush="Gray" BorderThickness="1,1,1,1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CornerRadius="5,5,5,5" Margin="5"  Background="White" Padding="10">
+                                <TextBlock x:Name="beschrijvingEvenement"  Text="{Binding Beschrijving}" FontSize="22" FontWeight="Medium" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="DatumEvenement" Text="{Binding Datum}" RelativePanel.Below="beschrijvingEvenement" Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Plaats}" TextWrapping="Wrap" FontStyle="Italic" FontSize="14" RelativePanel.Below="DatumEvenement" Padding="0,1,5,0"/>
+                                <Line Stroke="White" X1="0" X2="1" Y1="5" Y2="5" StrokeThickness="0" Stretch="UniformToFill"/>
+                            </RelativePanel>
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </ScrollViewer>
 </Page>
+    
+    

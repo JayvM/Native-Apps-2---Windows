@@ -10,6 +10,8 @@ namespace NativeAppsII_Services.Models
     {
         public DbSet<Onderneming> Ondernemingen { get; set; }
         public DbSet<Categorie> Categorieën { get; set; }
+        public DbSet<Actie> Acties { get; set; }
+        public DbSet<Evenement> Evenementen { get; set; }
         public ServiceContext() : base("name=ServiceContext")
         {
             Database.SetInitializer<ServiceContext>(new DropCreateDatabaseIfModelChanges<ServiceContext>());

@@ -188,8 +188,22 @@
     <Compile Include="Migrations\201812131553246_lol.Designer.cs">
       <DependentUpon>201812131553246_lol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812132012479_actie1.cs" />
+    <Compile Include="Migrations\201812132012479_actie1.Designer.cs">
+      <DependentUpon>201812132012479_actie1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812132032021_a.cs" />
+    <Compile Include="Migrations\201812132032021_a.Designer.cs">
+      <DependentUpon>201812132032021_a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812140044558_evenement.cs" />
+    <Compile Include="Migrations\201812140044558_evenement.Designer.cs">
+      <DependentUpon>201812140044558_evenement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Actie.cs" />
     <Compile Include="Models\Categorie.cs" />
+    <Compile Include="Models\Evenement.cs" />
     <Compile Include="Models\Onderneming.cs" />
     <Compile Include="Models\ServiceContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -284,6 +298,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812131553246_lol.resx">
       <DependentUpon>201812131553246_lol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812132012479_actie1.resx">
+      <DependentUpon>201812132012479_actie1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812132032021_a.resx">
+      <DependentUpon>201812132032021_a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812140044558_evenement.resx">
+      <DependentUpon>201812140044558_evenement.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

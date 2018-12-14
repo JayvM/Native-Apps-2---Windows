@@ -10,7 +10,7 @@ namespace NativeAppsII_Services
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
             // Web API routes
             config.MapHttpAttributeRoutes();
 

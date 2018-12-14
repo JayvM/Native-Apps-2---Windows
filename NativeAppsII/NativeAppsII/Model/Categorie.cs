@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 namespace NativeAppsII.Model
 {
     [JsonObjectAttribute]
-    class Categorie
+    public class Categorie
     {
         public int Id { get; set; }
         public String Naam { get; set; }
+
     }
 }

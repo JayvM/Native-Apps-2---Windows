@@ -1,5 +1,6 @@
 ﻿using NativeAppsII_Services.Models;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web.Http;
 
 namespace NativeAppsII_Services.Controllers
@@ -13,7 +14,7 @@ namespace NativeAppsII_Services.Controllers
         [Route("api/getOndernemingen")]
         public IQueryable<Onderneming> GetOndernemingen()
         {
-            return serviceContext.Ondernemingen.Include("Categorie").AsQueryable();
+            return serviceContext.Ondernemingen.Include("Categorie").Include("Acties").Include("Evenementen").AsQueryable();
         }
 
 
