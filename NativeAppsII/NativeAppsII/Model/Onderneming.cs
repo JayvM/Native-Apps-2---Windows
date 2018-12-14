@@ -30,7 +30,7 @@ namespace NativeAppsII.Model
         public String Openingsuren { get { return Openingsuur + " - " + Sluituur; } }
         public bool isOpen { get
             {
-                var currentTime = DateTime.UtcNow;
+                var currentTime = DateTime.Now.ToLocalTime();
                 
                 if (TimeSpan.Parse(this.Openingsuur) <= currentTime.TimeOfDay && TimeSpan.Parse(this.Sluituur) >= currentTime.TimeOfDay)
                 {
