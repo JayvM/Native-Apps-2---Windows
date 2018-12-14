@@ -15,6 +15,7 @@ namespace NativeAppsII_Services.Migrations
 
         protected override void Seed(NativeAppsII_Services.Models.ServiceContext context)
         {
+         
             context.Categorieën.AddOrUpdate(x => x.Id,
                 new Categorie()
                 {
@@ -91,8 +92,91 @@ namespace NativeAppsII_Services.Migrations
             CategorieId = 1
         }
         );
+            context.Acties.AddOrUpdate(x => x.Id,
+             new Actie()
+             {
+                 Id = 1,
+                 Beschrijving = "Alles aan 50%",
+                 GeldigTot = new DateTime(2018, 12, 31, 8, 30, 52),
+                 OndernemingId = 1
+        },
+               new Actie()
+               {
+                   Id = 2,
+                   Beschrijving = "Gratis zonnebril bij bezoek",
+                   GeldigTot = new DateTime(2018, 12, 31, 8, 30, 52),
+                   OndernemingId = 2
 
-            
+               },
+                 new Actie()
+                 {
+                     Id = 3,
+                     Beschrijving = "20% korting bij inleveren van bon",
+                     GeldigTot = new DateTime(2018, 12, 31, 8, 30, 52),
+                     OndernemingId = 3
+
+                 }
+
+
+             );
+            context.Evenementen.AddOrUpdate(x => x.Id,
+             new Evenement()
+             {
+                 Id = 1,
+                 Beschrijving = "Opendeurdag",
+                 Datum = new DateTime(2018, 12, 31, 8, 30, 52),
+                 Plaats = "Gravesteen Gent",
+                 OndernemingId = 1
+             },
+               new Evenement()
+               {
+                   Id = 2,
+                   Beschrijving = "Nieuwjaar vieren",
+                   Datum = new DateTime(2018, 12, 31, 8, 30, 52),
+                   Plaats = "Gravesteen Gent",
+                   OndernemingId = 2
+
+               },
+                 new Evenement()
+                 {
+                     Id = 3,
+                     Beschrijving = "Boekenbeurs 2018",
+                     Datum = new DateTime(2018, 12, 31, 8, 30, 52),
+                     Plaats = "Gravesteen Gent",
+                     OndernemingId = 3
+
+                 },
+               new Evenement()
+               {
+                   Id = 2,
+                   Beschrijving = "Nieuwjaar vieren",
+                   Datum = new DateTime(2018, 12, 31, 8, 30, 52),
+                   Plaats = "Gravesteen Gent",
+                   OndernemingId = 1
+
+               },
+               new Evenement()
+               {
+                   Id = 4,
+                   Beschrijving = "Nieuwjaar vieren",
+                   Datum = new DateTime(2018, 12, 31, 8, 30, 52),
+                   Plaats = "Gravesteen Gent",
+                   OndernemingId = 1
+
+               },
+               new Evenement()
+               {
+                   Id = 5,
+                   Beschrijving = "Nieuwjaar vieren",
+                   Datum = new DateTime(2018, 12, 31, 8, 30, 52),
+                   Plaats = "Gravesteen Gent",
+                   OndernemingId = 1
+
+               }
+
+
+             );
+
         }
     }
 }

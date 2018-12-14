@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NativeAppsII.Model
 {
-    class Onderneming
+    public class Onderneming
     {
 
         public int Id { get; set; }
@@ -23,6 +23,9 @@ namespace NativeAppsII.Model
         public String Website { get; set; }
         public String Telefooonnummer { get; set; }
         public String Information { get; set; }
+        public IList<Actie> acties { get; set; }
+        public IList<Evenement> evenementen { get; set; }
+
         public String Adres { get { return this.Straat + "," + this.Gemeente + " " + this.Land; } }
         public String Openingsuren { get { return Openingsuur + " - " + Sluituur; } }
         public bool isOpen { get
@@ -37,6 +40,8 @@ namespace NativeAppsII.Model
             }
         }
         public bool isClosed { get { return !isOpen; } }
+
+        public bool hasActies { get { return acties.Count != 0; } }
 
     }
 }

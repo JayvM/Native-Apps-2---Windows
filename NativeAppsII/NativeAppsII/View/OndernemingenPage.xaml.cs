@@ -66,7 +66,7 @@ namespace NativeAppsII.View
                 if(GemeenteFilter.Items.Where(e=>e.Equals(gemeente)).FirstOrDefault() == null)
                 GemeenteFilter.Items.Add(gemeente);
             }
-
+            
         }
         private async void filterLijst()
         {
@@ -97,6 +97,7 @@ namespace NativeAppsII.View
                     ondernemingenFiltered = ondernemingenFiltered.Where(onderneming => onderneming.isOpen==true).ToList();
 
                 }
+                
                 lvOndernemingen.DataContext = ondernemingenFiltered;
             }
         }
