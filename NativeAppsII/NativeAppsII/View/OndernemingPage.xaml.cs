@@ -38,8 +38,8 @@ namespace NativeAppsII.View
             base.OnNavigatedTo(e);
             Onderneming onderneming = e.Parameter as Onderneming;
             this.DataContext = onderneming;
-            lvActies.DataContext = onderneming.acties;
-            lvEvenementen.DataContext = onderneming.evenementen;
+            lvActies.DataContext = onderneming.Acties;
+            lvEvenementen.DataContext = onderneming.Evenementen;
             MapControl.MapServiceToken = "W92mdgL8YZQAXPAWgrxL~QS6p5UkRoDCGTtVDWe0grQ~Av_PduDzslv9yMaRivxJoNZ0HEp7TJORFm3LIz-I6-2yCgO1AjgaXW-RyWYLf9FF ";
             getLocation(onderneming);
         }

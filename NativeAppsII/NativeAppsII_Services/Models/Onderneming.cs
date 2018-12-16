@@ -41,7 +41,11 @@ namespace NativeAppsII_Services.Models
         [DataMember]
         public List<Actie> Acties { get; set; }
         [DataMember]
-        public List<Evenement> Evenementen{get;set;}
-
+        public List<Evenement> Evenementen { get; set; }
+        [DataMember]
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        [JsonIgnore] 
+        public User User { get; set; }
     }
 }

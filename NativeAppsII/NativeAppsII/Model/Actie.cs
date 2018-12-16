@@ -11,9 +11,21 @@ namespace NativeAppsII.Model
     {
         public int Id { get; set; }
         public String Beschrijving { get; set; }
-        public String Image { get; set; }
+        public String QR { get; set; }
         public DateTime GeldigTot { get; set; }
         public Onderneming onderneming { get; set; }
         public int OndernemingId { get; set; }
+
+        public Actie(string beschrijving, DateTime geldigTot, int ondernemingId)
+        {
+            Beschrijving = beschrijving;
+            GeldigTot = geldigTot;
+            OndernemingId = ondernemingId;
+        }
+
+        public Actie()
+        {
+
+        }
     }
 }

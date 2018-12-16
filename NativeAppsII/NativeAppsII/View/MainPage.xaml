@@ -12,6 +12,18 @@
         <HyperlinkButton Content="Ondernemingen" 
                  Click="HyperlinkButton_Click"
                  HorizontalAlignment="Left" Margin="471,384,0,0" VerticalAlignment="Top" Height="202" Width="449" FontSize="36"/>
+        <HyperlinkButton Content="Evenement Toevoegen" 
+                 Click="HyperlinkButton_Click3"
+                 HorizontalAlignment="Left" Margin="342,644,0,0" VerticalAlignment="Top" Height="202" Width="449" FontSize="36"/>
+        <HyperlinkButton Content="Actie Toevoegen" 
+                 Click="HyperlinkButton_Click4"
+                 HorizontalAlignment="Left" Margin="796,586,0,0" VerticalAlignment="Top" Height="202" Width="449" FontSize="36"/>
+        <HyperlinkButton Content="Onderneming toevoegen" 
+                 Click="HyperlinkButton_Click2"
+                 HorizontalAlignment="Left" Margin="301,110,0,0" VerticalAlignment="Top" Height="202" Width="449" FontSize="36"/>
+        <HyperlinkButton Content="Registreren" 
+                 Click="HyperlinkButton_Click5"
+                 HorizontalAlignment="Left" Margin="755,283,0,0" VerticalAlignment="Top" Height="202" Width="449" FontSize="36"/>
 
     </Grid>
 </Page>

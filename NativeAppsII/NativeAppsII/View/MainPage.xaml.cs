@@ -34,5 +34,24 @@ namespace NativeAppsII
         {
             this.Frame.Navigate(typeof(OndernemingenPage));
         }
+
+        private void HyperlinkButton_Click2(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(OndernemingToevoegenPage));
+        }
+        private void HyperlinkButton_Click3(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(EvenementToevoegenPage));
+        }
+
+        private void HyperlinkButton_Click4(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ActieToevoegenPage));
+        }
+
+        private void HyperlinkButton_Click5(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(RegistreerPage));
+        }
     }
 }

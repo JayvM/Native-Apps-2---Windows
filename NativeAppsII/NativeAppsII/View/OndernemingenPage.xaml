@@ -41,5 +41,10 @@
 
         <Button  Style="{StaticResource NavigationBackButtonNormalStyle}"  VerticalAlignment="Top" HorizontalAlignment="Left" Click="GoBack"/>
         <Button Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="447,500,0,0" Click="Button_Click"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="40">
+            <Button x:Name="Login" Content="Log in" HorizontalAlignment="Right" VerticalAlignment="Top" Click="LogIn" Margin="0,0,20,0"/>
+            <Button x:Name="Registreer" Content="Registreer" HorizontalAlignment="Right" VerticalAlignment="Top" Click="RegistreerPage" Margin="0,0,20,0" Height="32"/>
+            <Button x:Name="beheer" Content="Beheer account" HorizontalAlignment="Right" VerticalAlignment="Top" Click="BeheerAccount" Margin="0,0,20,0" Visibility="Collapsed"/>
+        </StackPanel>
     </Grid>
 </Page>

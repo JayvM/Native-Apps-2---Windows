@@ -23,15 +23,17 @@ namespace NativeAppsII.Model
         public String Website { get; set; }
         public String Telefooonnummer { get; set; }
         public String Information { get; set; }
-        public IList<Actie> acties { get; set; }
-        public IList<Evenement> evenementen { get; set; }
-
+        public IList<Actie> Acties { get; set; }
+        public IList<Evenement> Evenementen { get; set; }
+        [JsonIgnore]
         public String Adres { get { return this.Straat + "," + this.Gemeente + " " + this.Land; } }
+        [JsonIgnore]
         public String Openingsuren { get { return Openingsuur + " - " + Sluituur; } }
+        [JsonIgnore]
         public bool isOpen { get
             {
                 var currentTime = DateTime.Now.ToLocalTime();
-                
+
                 if (TimeSpan.Parse(this.Openingsuur) <= currentTime.TimeOfDay && TimeSpan.Parse(this.Sluituur) >= currentTime.TimeOfDay)
                 {
                     return true;
@@ -39,9 +41,30 @@ namespace NativeAppsII.Model
                 return false;
             }
         }
+        [JsonIgnore]
         public bool isClosed { get { return !isOpen; } }
+        [JsonIgnore]
+        public bool hasActies { get { return Acties.Count != 0; } }
 
-        public bool hasActies { get { return acties.Count != 0; } }
 
+        public Onderneming()
+        {
+
+        }
+        public Onderneming(string naam, string openingsuur, string sluituur, int categorieId, string gemeente, string straat, string land, string website, string telefooonnummer, string information)
+        {
+            Naam = naam;
+            Openingsuur = openingsuur;
+            Sluituur = sluituur;
+            CategorieId = categorieId;
+            Gemeente = gemeente;
+            Straat = straat;
+            Land = land;
+            Website = website;
+            Telefooonnummer = telefooonnummer;
+            Information = information;
+            this.Acties = new List<Actie>();
+            this.Evenementen = new List<Evenement>();
+        }
     }
 }
