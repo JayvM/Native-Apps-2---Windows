@@ -23,14 +23,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace NativeAppsII.View
+namespace NativeAppsII.View.DeviceFamily_Mobile
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class OndernemingenPage : Page
+
+    public sealed partial class OndernemingenPage_Mobile : Page
     {
         private OndernemingenViewModel OndernemingviewModel;
         private CategorieViewModel CategorieViewModel;
@@ -45,7 +42,7 @@ namespace NativeAppsII.View
 
 
 
-        public OndernemingenPage()
+        public OndernemingenPage_Mobile()
         {
             this.InitializeComponent();
         }
@@ -74,13 +71,13 @@ namespace NativeAppsII.View
                 if (GemeenteFilter.Items.Where(e => e.Equals(gemeente)).FirstOrDefault() == null)
                     GemeenteFilter.Items.Add(gemeente);
             }
-            if(GlobalToken.Token != null)
+            if (GlobalToken.Token != null)
             {
                 Login.Visibility = Visibility.Collapsed;
                 Registreer.Visibility = Visibility.Collapsed;
                 beheer.Visibility = Visibility.Visible;
             }
-            
+
 
         }
         private async void filterLijst()
@@ -122,7 +119,7 @@ namespace NativeAppsII.View
             Onderneming onderneming = (sender as Button).DataContext as Onderneming;
             if (onderneming != null)
             {
-                this.Frame.Navigate(typeof(OndernemingPage), onderneming);
+                this.Frame.Navigate(typeof(OndernemingPage_Mobile), onderneming);
             }
         }
 
@@ -196,7 +193,7 @@ namespace NativeAppsII.View
         }
         private async void ShowDialogAsync(bool fault)
         {
-           
+
 
             var dialog = new ContentDialog()
             {
@@ -269,7 +266,7 @@ namespace NativeAppsII.View
                 // Grid.SetColumn(txt3, 0);
                 //Grid.SetRow(txt3, 2);
                 panel.Children.Add(txt3);
-               
+
             }
 
 
@@ -287,21 +284,19 @@ namespace NativeAppsII.View
                 if (box1.Text.Trim().Equals("") || box2.Password.ToString().Trim().Equals(""))
                 {
 
-                } else
+                }
+                else
                     resultGebruiker = await gebruikerViewModel.LogInAsync(box1.Text, box2.Password.ToString());
                 string[] tokens = resultGebruiker.Split('"');
                 tokens[1] = "";
-                if (tokens[2] == "error" || tokens[3] == "invalid_grant")
+                if (tokens[5] == "token_type")
                 {
-                    ShowDialogAsync(true);
-                }
-                else
-                {
+
                     var token = tokens[4];
-                    Gebruiker user = new Gebruiker(Int32.Parse(tokens[21].ToString()),tokens[13].ToString(),tokens[17].ToString());
+                    Gebruiker user = new Gebruiker(Int32.Parse(tokens[21].ToString()), tokens[13].ToString(), tokens[17].ToString());
                     ((App)Application.Current).gebruiker = user;
                     GlobalToken.Token = tokens[3].ToString();
-                    this.Frame.Navigate(typeof(OndernemingenPage));
+                    this.Frame.Navigate(typeof(OndernemingenPage_Mobile));
                     ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
                     XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
                     XmlNodeList toastTekstElementen = toastXml.GetElementsByTagName("text");
@@ -310,6 +305,10 @@ namespace NativeAppsII.View
                     ((XmlElement)toastNode).SetAttribute("duration", "long");
                     ToastNotification toast = new ToastNotification(toastXml);
                     ToastNotificationManager.CreateToastNotifier().Show(toast);
+                }
+                else
+                {
+                    ShowDialogAsync(true);
                 }
 
 
@@ -320,20 +319,33 @@ namespace NativeAppsII.View
 
         private void BeheerAccount(object sender, RoutedEventArgs e)
         {
-            if(((App)Application.Current).gebruiker.Role == "Ondernemer")
+            if (((App)Application.Current).gebruiker.Role == "Ondernemer")
             {
-                this.Frame.Navigate(typeof(BeheerOndernemerPage));
+                this.Frame.Navigate(typeof(BeheerOndernemenPage_Mobile));
             }
         }
 
         private void RegistreerPage(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(RegistreerPage));
+            this.Frame.Navigate(typeof(RegistreerPage_Mobile));
+        }
+
+
+        private void FilterClick(object sender, RoutedEventArgs e)
+        {
+            if (Filtershow.Visibility == Visibility.Collapsed)
+            {
+                Filtershow.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Filtershow.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
 
 
-    
+
 
 

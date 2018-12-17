@@ -40,5 +40,12 @@ namespace NativeAppsII.ViewModel
             var json = await client.GetStringAsync(new Uri("http://localhost:65078/api/getOndernemingen/" + id));
             return JsonConvert.DeserializeObject<ObservableCollection<Onderneming>>(json);
         }
+
+        public async Task<bool> deleteOnderneming(int id)
+        {
+            HttpClient client = new HttpClient();
+            var json = await client.DeleteAsync(new Uri("http://localhost:65078/api/deleteOndernemingen/" + id));
+            return json.IsSuccessStatusCode;
+        }
     }
 }

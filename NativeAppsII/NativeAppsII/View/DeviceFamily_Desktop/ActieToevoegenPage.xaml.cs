@@ -33,6 +33,7 @@ namespace NativeAppsII.View
 
         ActieViewModel actieViewModel;
         Actie actieObject;
+        String bedrijf;
 
         public ActieToevoegenPage()
         {
@@ -46,6 +47,7 @@ namespace NativeAppsII.View
         {
 
             actieObject = e.Parameter as Actie;
+            bedrijf = e.Parameter as String;
             if (actieObject != null)
             {
                 Beschrijving.Text = actieObject.Beschrijving;
@@ -74,7 +76,7 @@ namespace NativeAppsII.View
                             ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
                             XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
                             XmlNodeList toastTekstElementen = toastXml.GetElementsByTagName("text");
-                            toastTekstElementen[0].AppendChild(toastXml.CreateTextNode("Evenement"));
+                            toastTekstElementen[0].AppendChild(toastXml.CreateTextNode("Actie"));
                             toastTekstElementen[1].AppendChild(toastXml.CreateTextNode(actieObject.Beschrijving + " aangepast"));
                             IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
                             ((XmlElement)toastNode).SetAttribute("duration", "long");
@@ -89,8 +91,9 @@ namespace NativeAppsII.View
                         DateTime myDate = DateTime.Parse(date);
                         Actie actie = new Actie(
                             Beschrijving.Text,
-                            myDate,
-                            1
+                            myDate, Int32.Parse(bedrijf)
+                           
+
                             );
                         actieAnswer = await actieViewModel.addActieAsync(actie);
                         if (actieAnswer)
@@ -99,7 +102,7 @@ namespace NativeAppsII.View
                             ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
                             XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
                             XmlNodeList toastTekstElementen = toastXml.GetElementsByTagName("text");
-                            toastTekstElementen[0].AppendChild(toastXml.CreateTextNode("Evenement"));
+                            toastTekstElementen[0].AppendChild(toastXml.CreateTextNode("Actie"));
                             toastTekstElementen[1].AppendChild(toastXml.CreateTextNode(actie.Beschrijving + " werd toegevoegd aan je acties"));
                             IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
                             ((XmlElement)toastNode).SetAttribute("duration", "long");

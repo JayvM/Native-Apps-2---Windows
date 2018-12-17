@@ -1,4 +1,6 @@
 ﻿using NativeAppsII.Model;
+using NativeAppsII.View;
+using NativeAppsII.View.DeviceFamily_Mobile;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -72,7 +74,16 @@ namespace NativeAppsII
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    var str = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
+                    if (str == "Windows.Desktop")
+                    {
+                        rootFrame.Navigate(typeof(OndernemingenPage), e.Arguments);
+                    }
+                    else
+                    {
+                        rootFrame.Navigate(typeof(OndernemingenPage_Mobile), e.Arguments);
+                    }
+                   
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();

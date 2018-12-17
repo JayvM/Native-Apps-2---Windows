@@ -131,31 +131,52 @@
     <Compile Include="ViewModel\EvenementViewModel.cs" />
     <Compile Include="ViewModel\GebruikerViewModel.cs" />
     <Compile Include="ViewModel\OndernemingenViewModel.cs" />
-    <Compile Include="View\ActieToevoegenPage.xaml.cs">
+    <Compile Include="View\DeviceFamily_Desktop\ActieToevoegenPage.xaml.cs">
       <DependentUpon>ActieToevoegenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BeheerOndernemerPage.xaml.cs">
+    <Compile Include="View\DeviceFamily_Desktop\BeheerOndernemerPage.xaml.cs">
       <DependentUpon>BeheerOndernemerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EvenementToevoegenPage.xaml.cs">
+    <Compile Include="View\DeviceFamily_Desktop\EvenementToevoegenPage.xaml.cs">
       <DependentUpon>EvenementToevoegenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainPage.xaml.cs">
+    <Compile Include="View\DeviceFamily_Desktop\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services.cs" />
-    <Compile Include="View\OndernemingenPage.xaml.cs">
+    <Compile Include="View\DeviceFamily_Mobile\ActieToeveogen_Mobile.xaml.cs">
+      <DependentUpon>ActieToeveogen_Mobile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceFamily_Mobile\BeheerOndernemenPage_Mobile.xaml.cs">
+      <DependentUpon>BeheerOndernemenPage_Mobile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceFamily_Mobile\EvenementToevoegenPage_Mobile.xaml.cs">
+      <DependentUpon>EvenementToevoegenPage_Mobile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceFamily_Mobile\OndernemingenPage_Mobile.xaml.cs">
+      <DependentUpon>OndernemingenPage_Mobile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceFamily_Mobile\OndernemingPage_Mobile.xaml.cs">
+      <DependentUpon>OndernemingPage_Mobile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceFamily_Mobile\OndernemingToevoegenPage_Mobile.xaml.cs">
+      <DependentUpon>OndernemingToevoegenPage_Mobile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceFamily_Desktop\OndernemingenPage.xaml.cs">
       <DependentUpon>OndernemingenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OndernemingPage.xaml.cs">
+    <Compile Include="View\DeviceFamily_Desktop\OndernemingPage.xaml.cs">
       <DependentUpon>OndernemingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OndernemingToevoegenPage.xaml.cs">
+    <Compile Include="View\DeviceFamily_Desktop\OndernemingToevoegenPage.xaml.cs">
       <DependentUpon>OndernemingToevoegenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RegistreerPage.xaml.cs">
+    <Compile Include="View\DeviceFamily_Desktop\RegistreerPage.xaml.cs">
       <DependentUpon>RegistreerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceFamily_Mobile\RegistreerPage_Mobile.xaml.cs">
+      <DependentUpon>RegistreerPage_Mobile.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -228,35 +249,63 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\ActieToevoegenPage.xaml">
+    <Page Include="View\DeviceFamily_Desktop\ActieToevoegenPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BeheerOndernemerPage.xaml">
+    <Page Include="View\DeviceFamily_Desktop\BeheerOndernemerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EvenementToevoegenPage.xaml">
+    <Page Include="View\DeviceFamily_Desktop\EvenementToevoegenPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainPage.xaml">
+    <Page Include="View\DeviceFamily_Desktop\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\OndernemingenPage.xaml">
+    <Page Include="View\DeviceFamily_Mobile\ActieToeveogen_Mobile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\OndernemingPage.xaml">
+    <Page Include="View\DeviceFamily_Mobile\BeheerOndernemenPage_Mobile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\OndernemingToevoegenPage.xaml">
+    <Page Include="View\DeviceFamily_Mobile\EvenementToevoegenPage_Mobile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RegistreerPage.xaml">
+    <Page Include="View\DeviceFamily_Mobile\OndernemingenPage_Mobile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceFamily_Mobile\OndernemingPage_Mobile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceFamily_Mobile\OndernemingToevoegenPage_Mobile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceFamily_Desktop\OndernemingenPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceFamily_Desktop\OndernemingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceFamily_Desktop\OndernemingToevoegenPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceFamily_Desktop\RegistreerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceFamily_Mobile\RegistreerPage_Mobile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

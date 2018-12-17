@@ -29,20 +29,25 @@ namespace NativeAppsII.View
         Actie huidigeActie;
         Evenement huidigEvenement;
         OndernemingenViewModel ondernemingViewModel;
+        ActieViewModel actieViewModel;
+        EvenementViewModel evenementViewModel;
         public BeheerOndernemerPage()
         {
             ondernemingViewModel = new OndernemingenViewModel();
+            actieViewModel = new ActieViewModel();
+            evenementViewModel = new EvenementViewModel();
+
             this.InitializeComponent();
             Initialize();
         }
 
         public async void Initialize()
         {
-            //var ondernemingen = await ondernemingViewModel.getOndernemingenVanGebruiker(((App)Application.Current).gebruiker.Id);
-            ObservableCollection<Onderneming> ondernemingen = await ondernemingViewModel.getOndernemingenVanGebruiker(1);
-
-          //  Name.Text = ((App)Application.Current).gebruiker.Gebruikersnaam;
+            ObservableCollection<Onderneming> ondernemingen = await ondernemingViewModel.getOndernemingenVanGebruiker(((App)Application.Current).gebruiker.Id);
+                Name.Text = ((App)Application.Current).gebruiker.Gebruikersnaam;
             Ondernemingen.DataContext = ondernemingen;
+            ActieT.Visibility = Visibility.Collapsed;
+            EvenementT.Visibility = Visibility.Collapsed;
 
         }
         
@@ -70,6 +75,8 @@ namespace NativeAppsII.View
 
                     Evenement.Visibility = Visibility.Collapsed;
                     Actie.Visibility = Visibility.Collapsed;
+                    ActieT.Visibility = Visibility.Visible;
+                    EvenementT.Visibility = Visibility.Visible;
                     Onderneming.Visibility = Visibility.Visible;
                 }
             }
@@ -103,12 +110,12 @@ namespace NativeAppsII.View
 
         private void ActieToevoegen(object sender, RoutedEventArgs e)
         {
-            
+            this.Frame.Navigate(typeof(ActieToevoegenPage),huidigeOnderneming.Id.ToString());
         }
 
-        private void EvenementToeveogen(object sender, RoutedEventArgs e)
+        private void EvenementToevoegen(object sender, RoutedEventArgs e)
         {
-            
+            this.Frame.Navigate(typeof(EvenementToevoegenPage),huidigeOnderneming.Id.ToString());
         }
 
 
@@ -165,18 +172,32 @@ namespace NativeAppsII.View
 
         }
 
-        private void RemoveO(object sender, RoutedEventArgs e)
+        private async void RemoveO(object sender, RoutedEventArgs e)
         {
- 
+            await ondernemingViewModel.deleteOnderneming(huidigeOnderneming.Id);
+            ObservableCollection<Onderneming> ondernemingen = await ondernemingViewModel.getOndernemingenVanGebruiker(((App)Application.Current).gebruiker.Id);
+            Ondernemingen.DataContext = ondernemingen;
+
+           // Frame.Navigate(typeof(BeheerOndernemerPage), huidigeOnderneming);
+
 
         }
-        private void RemoveA(object sender, RoutedEventArgs e)
+        private async void RemoveA(object sender, RoutedEventArgs e)
         {
-        
+            await actieViewModel.deleteActie(huidigeActie.Id);
+            ObservableCollection<Onderneming> ondernemingen = await ondernemingViewModel.getOndernemingenVanGebruiker(((App)Application.Current).gebruiker.Id); 
+            huidigeOnderneming = ondernemingen.FirstOrDefault(a => a.Id == huidigeOnderneming.Id);
+            acties.DataContext = huidigeOnderneming.Acties;
+
+
 
         }
-        private void RemoveE(object sender, RoutedEventArgs e)
+        private async void RemoveE(object sender, RoutedEventArgs e)
         {
+            await evenementViewModel.deleteEvenement(huidigEvenement.Id);
+            ObservableCollection<Onderneming> ondernemingen = await ondernemingViewModel.getOndernemingenVanGebruiker(((App)Application.Current).gebruiker.Id);
+            huidigeOnderneming = ondernemingen.FirstOrDefault(a => a.Id == huidigeOnderneming.Id);
+            evenementen.DataContext = huidigeOnderneming.Evenementen;
             
 
         }

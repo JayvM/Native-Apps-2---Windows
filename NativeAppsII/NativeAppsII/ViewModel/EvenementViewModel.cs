@@ -26,5 +26,12 @@ namespace NativeAppsII.ViewModel
             var json = await client.PostAsync("http://localhost:65078/api/bewerkEvenement/", new StringContent(evenementJson, System.Text.Encoding.UTF8, "application/json"));
             return json.IsSuccessStatusCode;
         }
+
+        public async Task<bool> deleteEvenement(int id)
+        {
+            HttpClient client = new HttpClient();
+            var json = await client.DeleteAsync(new Uri("http://localhost:65078/api/deleteEvenement/" + id));
+            return json.IsSuccessStatusCode;
+        }
     }
 }

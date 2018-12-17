@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Mvc;
+using RouteAttribute = System.Web.Http.RouteAttribute;
 
 namespace NativeAppsII_Services.Controllers
 {
@@ -46,6 +47,20 @@ namespace NativeAppsII_Services.Controllers
                 result.Beschrijving = actie.Beschrijving;
                 serviceContext.SaveChanges();
                 return Ok(actie);
+            }
+            return BadRequest(ModelState);
+        }
+
+        [Route("api/deleteActie/{id}")]
+        public IHttpActionResult DeleteEvenement(int id)
+        {
+
+            var result = serviceContext.Acties.FirstOrDefault(on => on.Id == id);
+            if (result != null)
+            {
+                serviceContext.Acties.Remove(result);
+                serviceContext.SaveChanges();
+                return Ok();
             }
             return BadRequest(ModelState);
         }

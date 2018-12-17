@@ -16,20 +16,20 @@ namespace NativeAppsII_Services.Controllers
 
 
 
-    [ResponseType(typeof(Evenement))]
-    [Route("api/postEvenement")]
-    public IHttpActionResult PostEvenement(Evenement evenement)
-    {
-        if (!ModelState.IsValid)
+        [ResponseType(typeof(Evenement))]
+        [Route("api/postEvenement")]
+        public IHttpActionResult PostEvenement(Evenement evenement)
         {
-            return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            serviceContext.Evenementen.Add(evenement);
+            serviceContext.SaveChanges();
+
+            return Ok(evenement);
         }
-
-        serviceContext.Evenementen.Add(evenement);
-        serviceContext.SaveChanges();
-
-        return Ok(evenement);
-    }
 
         [ResponseType(typeof(Evenement))]
         [Route("api/bewerkEvenement")]
@@ -52,6 +52,18 @@ namespace NativeAppsII_Services.Controllers
             return Ok(evenement);
         }
 
+        [Route("api/deleteEvenement/{id}")]
+        public IHttpActionResult DeleteEvenement(int id)
+        {
 
+            var result = serviceContext.Evenementen.FirstOrDefault(on => on.Id == id);
+            if (result != null)
+            {
+                serviceContext.Evenementen.Remove(result);
+                serviceContext.SaveChanges();
+                return Ok();
+            }
+            return BadRequest(ModelState);
+        }
     }
 }

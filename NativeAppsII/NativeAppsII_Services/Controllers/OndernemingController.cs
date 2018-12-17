@@ -68,6 +68,20 @@ namespace NativeAppsII_Services.Controllers
             return BadRequest(ModelState);
         }
 
+        [Route("api/deleteOndernemingen/{id}")]
+        public IHttpActionResult DeleteOndernemingen(int id)
+        {
+            
+            var result = serviceContext.Ondernemingen.FirstOrDefault(on => on.Id == id);
+            if(result != null)
+            {
+                serviceContext.Ondernemingen.Remove(result);
+                serviceContext.SaveChanges();
+                return Ok();
+            }
+            return BadRequest(ModelState);
+        }
+
 
     }
 }

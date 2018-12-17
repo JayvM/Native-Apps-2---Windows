@@ -32,6 +32,8 @@ namespace NativeAppsII.View
         EvenementViewModel evenementViewModel;
         OndernemingenViewModel ondernemingenViewModel;
         Evenement evenementObject;
+        String bedrijf;
+
 
         public EvenementToevoegenPage()
         {
@@ -46,6 +48,8 @@ namespace NativeAppsII.View
         {
            
              evenementObject = e.Parameter as Evenement;
+            bedrijf = e.Parameter as String;
+
             if (evenementObject != null)
             {
                 Beschrijving.Text = evenementObject.Beschrijving;
@@ -75,7 +79,7 @@ namespace NativeAppsII.View
                     evenementObject.Plaats = Plaats.Text;
                     evenementObject.Datum = myDateObject;
 
-                     var evenementAnswer = await evenementViewModel.bewerkEvenementAsync(evenementObject);
+                    var evenementAnswer = await evenementViewModel.bewerkEvenementAsync(evenementObject);
                     if (evenementAnswer)
                     {
                         this.Frame.Navigate(typeof(BeheerOndernemerPage));
@@ -89,31 +93,32 @@ namespace NativeAppsII.View
                         ToastNotification toast = new ToastNotification(toastXml);
                         ToastNotificationManager.CreateToastNotifier().Show(toast);
                     }
-                    else
+                }
+                else
+                {
+                    var date = Datum.Date.Date.ToString().Substring(0, 10) + " " + Time.Time.ToString();
+                    DateTime myDate = DateTime.Parse(date);
+                    Evenement evenement = new Evenement(
+                        Beschrijving.Text,
+                        Plaats.Text,
+                        myDate, Int32.Parse(bedrijf)
+                        );
+                    var evenementAnswerObject = await evenementViewModel.addEvenementAsync(evenement);
+                    if (evenementAnswerObject)
                     {
-                        var date = Datum.Date.Date.ToString().Substring(0, 10) + " " + Time.Time.ToString();
-                        DateTime myDate = DateTime.Parse(date);
-                        Evenement evenement = new Evenement(
-                            Beschrijving.Text,
-                            Plaats.Text,
-                            myDate, 1
-                            );
-                        var evenementAnswerObject = await evenementViewModel.addEvenementAsync(evenement);
-                        if (evenementAnswerObject)
-                        {
-                            this.Frame.Navigate(typeof(BeheerOndernemerPage));
-                            ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
-                            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
-                            XmlNodeList toastTekstElementen = toastXml.GetElementsByTagName("text");
-                            toastTekstElementen[0].AppendChild(toastXml.CreateTextNode("Evenement"));
-                            toastTekstElementen[1].AppendChild(toastXml.CreateTextNode(evenement.Beschrijving + " werd toegevoegd aan je evenementen"));
-                            IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
-                            ((XmlElement)toastNode).SetAttribute("duration", "long");
-                            ToastNotification toast = new ToastNotification(toastXml);
-                            ToastNotificationManager.CreateToastNotifier().Show(toast);
-                        }
+                        this.Frame.Navigate(typeof(BeheerOndernemerPage));
+                        ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
+                        XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+                        XmlNodeList toastTekstElementen = toastXml.GetElementsByTagName("text");
+                        toastTekstElementen[0].AppendChild(toastXml.CreateTextNode("Evenement"));
+                        toastTekstElementen[1].AppendChild(toastXml.CreateTextNode(evenement.Beschrijving + " werd toegevoegd aan je evenementen"));
+                        IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+                        ((XmlElement)toastNode).SetAttribute("duration", "long");
+                        ToastNotification toast = new ToastNotification(toastXml);
+                        ToastNotificationManager.CreateToastNotifier().Show(toast);
                     }
                 }
+                
 
 
             }
