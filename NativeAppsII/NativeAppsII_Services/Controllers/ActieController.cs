@@ -29,5 +29,25 @@ namespace NativeAppsII_Services.Controllers
 
             return Ok(actie);
         }
+
+        [ResponseType(typeof(Actie))]
+        [System.Web.Http.Route("api/bewerkActie")]
+        public IHttpActionResult BewerkActie(Actie actie)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = serviceContext.Acties.SingleOrDefault(a => a.Id == actie.Id);
+            if(result != null)
+            {
+                result.GeldigTot = actie.GeldigTot;
+                result.Beschrijving = actie.Beschrijving;
+                serviceContext.SaveChanges();
+                return Ok(actie);
+            }
+            return BadRequest(ModelState);
+        }
     }
 }

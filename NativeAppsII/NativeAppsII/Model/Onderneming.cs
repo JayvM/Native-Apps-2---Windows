@@ -25,6 +25,7 @@ namespace NativeAppsII.Model
         public String Information { get; set; }
         public IList<Actie> Acties { get; set; }
         public IList<Evenement> Evenementen { get; set; }
+        public int UserId { get; set; }
         [JsonIgnore]
         public String Adres { get { return this.Straat + "," + this.Gemeente + " " + this.Land; } }
         [JsonIgnore]
@@ -51,7 +52,7 @@ namespace NativeAppsII.Model
         {
 
         }
-        public Onderneming(string naam, string openingsuur, string sluituur, int categorieId, string gemeente, string straat, string land, string website, string telefooonnummer, string information)
+        public Onderneming(string naam, string openingsuur, string sluituur, int categorieId, string gemeente, string straat, string land, string website, string telefooonnummer, string information,int gebruikerid)
         {
             Naam = naam;
             Openingsuur = openingsuur;
@@ -63,6 +64,7 @@ namespace NativeAppsII.Model
             Website = website;
             Telefooonnummer = telefooonnummer;
             Information = information;
+            UserId = gebruikerid;
             this.Acties = new List<Actie>();
             this.Evenementen = new List<Evenement>();
         }

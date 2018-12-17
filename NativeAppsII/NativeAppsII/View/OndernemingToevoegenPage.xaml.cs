@@ -31,6 +31,7 @@ namespace NativeAppsII.View
     {
         CategorieViewModel categorieViewModel;
         OndernemingenViewModel ondernemingenViewModel;
+        Onderneming comp;
 
         private ObservableCollection<Categorie> categorieën;
         public OndernemingToevoegenPage()
@@ -43,33 +44,62 @@ namespace NativeAppsII.View
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             categorieën = await categorieViewModel.getCategorieën();
-            Onderneming comp = e.Parameter as Onderneming;
+            foreach (var categorie in categorieën)
+            {
+                Categorie.Items.Add(categorie.Naam);
+            }
+           
+            comp = e.Parameter as Onderneming;
             if (comp != null)
             {
+                Naam.Text = comp.Naam;
+                Openingsuur.Text = comp.Openingsuur;
+                Sluitsuur.Text = comp.Sluituur;
+                Categorie.SelectedIndex = Categorie.Items.IndexOf(comp.Categorie.Naam);
+                Gemeente.Text = comp.Gemeente;
+                Straat.Text = comp.Straat;
+                Land.Text = comp.Land;
+                Website.Text = comp.Website;
+                Telefoonnummer.Text = comp.Telefooonnummer;
+                Beschrijving.Text = comp.Information;
                 
-                this.DataContext = comp;
-                foreach (var categorie in categorieën)
-                {
-                    Categorie.Items.Add(categorie.Naam);
-                }
                 Categorie.SelectedItem = comp.Categorie;
-            }
-            else
-            {
-                this.DataContext = null;
-                foreach (var categorie in categorieën)
-                {
-                    Categorie.Items.Add(categorie.Naam);
-                }
-            }
-                
+
+            }                
 
         }
         private async void SaveAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             if (Validate())
             {
-                if (this.DataContext == null)
+                if (comp != null)
+                {
+                    comp.Naam = Naam.Text;
+                    comp.Openingsuur = Openingsuur.Text;
+                    comp.Sluituur = Sluitsuur.Text;
+                   comp.Categorie = await categorieViewModel.getCategorie(Categorie.SelectedValue.ToString());
+                    comp.Gemeente = Gemeente.Text;
+                    comp.Straat = Straat.Text;
+                    comp.Land = Land.Text;
+                    comp.Website = Website.Text;
+                    comp.Telefooonnummer = Telefoonnummer.Text;
+                    comp.Information = Beschrijving.Text;
+                    var ondernemingAnswer = await ondernemingenViewModel.bewerkOnderneming(comp);
+                    if (ondernemingAnswer)
+                    {
+                        this.Frame.Navigate(typeof(BeheerOndernemerPage));
+                        ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
+                        XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+                        XmlNodeList toastTekstElementen = toastXml.GetElementsByTagName("text");
+                        toastTekstElementen[0].AppendChild(toastXml.CreateTextNode("Onderneming"));
+                        toastTekstElementen[1].AppendChild(toastXml.CreateTextNode(comp.Naam + " werd aangepast"));
+                        IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+                        ((XmlElement)toastNode).SetAttribute("duration", "long");
+                        ToastNotification toast = new ToastNotification(toastXml);
+                        ToastNotificationManager.CreateToastNotifier().Show(toast);
+                    }
+                }
+                    else 
                 {
                     var categorie = await categorieViewModel.getCategorie(Categorie.SelectedValue.ToString());
                     Onderneming onderneming = new Onderneming(
@@ -82,11 +112,13 @@ namespace NativeAppsII.View
                         Land.Text,
                         Website.Text,
                         Telefoonnummer.Text,
-                        Beschrijving.Text
+                        Beschrijving.Text,
+                        ((App)Application.Current).gebruiker.Id
                         );
                    var ondernemingAnswer =  await ondernemingenViewModel.addOnderneming(onderneming);
                     if (ondernemingAnswer)
                     {
+                        this.Frame.Navigate(typeof(BeheerOndernemerPage));
                         ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
                         XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
                         XmlNodeList toastTekstElementen = toastXml.GetElementsByTagName("text");

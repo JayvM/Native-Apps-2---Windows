@@ -31,7 +31,8 @@ namespace NativeAppsII.View
     {
         EvenementViewModel evenementViewModel;
         OndernemingenViewModel ondernemingenViewModel;
-        
+        Evenement evenementObject;
+
         public EvenementToevoegenPage()
         {
             this.InitializeComponent();
@@ -44,10 +45,14 @@ namespace NativeAppsII.View
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
            
-            Evenement evenement = e.Parameter as Evenement;
-            if (evenement != null)
+             evenementObject = e.Parameter as Evenement;
+            if (evenementObject != null)
             {
-                this.DataContext = evenement;
+                Beschrijving.Text = evenementObject.Beschrijving;
+                Datum.Date = evenementObject.getDate;
+                Time.Time = evenementObject.getHour;
+                Plaats.Text = evenementObject.Plaats;
+
 
             }
             else
@@ -62,85 +67,87 @@ namespace NativeAppsII.View
         {
             if (Validate())
             {
-                if (this.DataContext == null)
+                if (evenementObject != null)
                 {
-                    var date = Datum.Date.Date.ToString().Substring(0,10) +" "+ Time.Time.ToString();
-                    DateTime myDate = DateTime.Parse(date);
-                    Evenement evenement = new Evenement(
-                        Beschrijving.Text,
-                        Plaats.Text,
-                        myDate,1
-                        );
-                    var evenementAnswer = await evenementViewModel.addEvenementAsync(evenement);
+                    var dateObject = Datum.Date.Date.ToString().Substring(0, 10) + " " + Time.Time.ToString();
+                    DateTime myDateObject = DateTime.Parse(dateObject);
+                    evenementObject.Beschrijving = Beschrijving.Text;
+                    evenementObject.Plaats = Plaats.Text;
+                    evenementObject.Datum = myDateObject;
+
+                     var evenementAnswer = await evenementViewModel.bewerkEvenementAsync(evenementObject);
                     if (evenementAnswer)
                     {
+                        this.Frame.Navigate(typeof(BeheerOndernemerPage));
                         ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
                         XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
                         XmlNodeList toastTekstElementen = toastXml.GetElementsByTagName("text");
                         toastTekstElementen[0].AppendChild(toastXml.CreateTextNode("Evenement"));
-                        toastTekstElementen[1].AppendChild(toastXml.CreateTextNode(evenement.Beschrijving + " werd toegevoegd aan je evenementen"));
+                        toastTekstElementen[1].AppendChild(toastXml.CreateTextNode(evenementObject.Beschrijving + " aangepast"));
                         IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
                         ((XmlElement)toastNode).SetAttribute("duration", "long");
                         ToastNotification toast = new ToastNotification(toastXml);
                         ToastNotificationManager.CreateToastNotifier().Show(toast);
                     }
+                    else
+                    {
+                        var date = Datum.Date.Date.ToString().Substring(0, 10) + " " + Time.Time.ToString();
+                        DateTime myDate = DateTime.Parse(date);
+                        Evenement evenement = new Evenement(
+                            Beschrijving.Text,
+                            Plaats.Text,
+                            myDate, 1
+                            );
+                        var evenementAnswerObject = await evenementViewModel.addEvenementAsync(evenement);
+                        if (evenementAnswerObject)
+                        {
+                            this.Frame.Navigate(typeof(BeheerOndernemerPage));
+                            ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
+                            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+                            XmlNodeList toastTekstElementen = toastXml.GetElementsByTagName("text");
+                            toastTekstElementen[0].AppendChild(toastXml.CreateTextNode("Evenement"));
+                            toastTekstElementen[1].AppendChild(toastXml.CreateTextNode(evenement.Beschrijving + " werd toegevoegd aan je evenementen"));
+                            IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+                            ((XmlElement)toastNode).SetAttribute("duration", "long");
+                            ToastNotification toast = new ToastNotification(toastXml);
+                            ToastNotificationManager.CreateToastNotifier().Show(toast);
+                        }
+                    }
                 }
+
+
             }
-
-
         }
-
-        private bool Validate()
-        {
-            var validation = true;
-            if (Beschrijving.Text.Trim() == "")
+            private bool Validate()
             {
-                beschrijvingError.Visibility = Visibility.Visible;
-                validation = false;
-            }
-            else
-            {
-                beschrijvingError.Visibility = Visibility.Collapsed;
+                var validation = true;
+                if (Beschrijving.Text.Trim() == "")
+                {
+                    beschrijvingError.Visibility = Visibility.Visible;
+                    validation = false;
+                }
+                else
+                {
+                    beschrijvingError.Visibility = Visibility.Collapsed;
 
-            }
+                }
 
-            if (Plaats.Text.Trim() == "")
-            {
-                plaatsError.Visibility = Visibility.Visible;
-                validation = false;
+                if (Plaats.Text.Trim() == "")
+                {
+                    plaatsError.Visibility = Visibility.Visible;
+                    validation = false;
 
-            }
-            else
-            {
-                plaatsError.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    plaatsError.Visibility = Visibility.Collapsed;
 
-            }
+                }
 
-            /*
-            if (Datum.Date.ToString().Trim() == "")
-            {
-                DateTimeError.Visibility = Visibility.Visible;
-                validation = false;
 
-            }
-            else
-            {
-                DateTimeError.Visibility = Visibility.Collapsed;
-
-            }
-            if (Time.Time.ToString().Trim() == "")
-            {
-                DateTimeError.Visibility = Visibility.Visible;
-                validation = false;
-
-            }
-            else
-            {
-                DateTimeError.Visibility = Visibility.Collapsed;
-
-            }*/
-            return validation;
+                return validation;
         }
+        
         private void GoBack(object sender, RoutedEventArgs e)
         {
             On_BackRequested();

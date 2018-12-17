@@ -26,5 +26,19 @@ namespace NativeAppsII.ViewModel
             var json = await client.PostAsync("http://localhost:65078/api/postOnderneming/", new StringContent(ondernemingJson, System.Text.Encoding.UTF8, "application/json"));
             return json.IsSuccessStatusCode;
         }
+        public async Task<bool> bewerkOnderneming(Onderneming onderneming)
+        {
+            var ondernemingJson = JsonConvert.SerializeObject(onderneming);
+            HttpClient client = new HttpClient();
+            var json = await client.PostAsync("http://localhost:65078/api/bewerkOnderneming/", new StringContent(ondernemingJson, System.Text.Encoding.UTF8, "application/json"));
+            return json.IsSuccessStatusCode;
+        }
+
+        public async Task<ObservableCollection<Onderneming>> getOndernemingenVanGebruiker(int id)
+        {
+            HttpClient client = new HttpClient();
+            var json = await client.GetStringAsync(new Uri("http://localhost:65078/api/getOndernemingen/" + id));
+            return JsonConvert.DeserializeObject<ObservableCollection<Onderneming>>(json);
+        }
     }
 }

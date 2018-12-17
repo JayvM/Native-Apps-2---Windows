@@ -21,7 +21,7 @@
         <HyperlinkButton Content="Onderneming toevoegen" 
                  Click="HyperlinkButton_Click2"
                  HorizontalAlignment="Left" Margin="301,110,0,0" VerticalAlignment="Top" Height="202" Width="449" FontSize="36"/>
-        <HyperlinkButton Content="Registreren" 
+        <HyperlinkButton Content="Beheer" 
                  Click="HyperlinkButton_Click5"
                  HorizontalAlignment="Left" Margin="755,283,0,0" VerticalAlignment="Top" Height="202" Width="449" FontSize="36"/>
 

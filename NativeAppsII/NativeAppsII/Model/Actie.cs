@@ -15,6 +15,8 @@ namespace NativeAppsII.Model
         public DateTime GeldigTot { get; set; }
         public Onderneming onderneming { get; set; }
         public int OndernemingId { get; set; }
+        public TimeSpan getHour { get { return GeldigTot.TimeOfDay; } }
+        public DateTime getDate { get { return GeldigTot.Date; } }
 
         public Actie(string beschrijving, DateTime geldigTot, int ondernemingId)
         {
